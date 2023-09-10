@@ -18,5 +18,8 @@ void stripNewline(char *str);
 void executeCommand(char *command);
 int parseArguments(char *command, char *args[]);
 void printEnvironment(void);
+int findCommandPath(char *command, char *full_path);
+int startsWith(const char *str, const char *prefix);
+char *custom_getline(void);
 
 #endif

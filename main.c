@@ -1,6 +1,26 @@
 #include "shell.h"
 
 /**
+ * startsWith - Checks if a string starts with a specified prefix.
+ * @str: The string to check.
+ * @prefix: The prefix to look for.
+ * 
+ * Return: 1 if the string starts with the prefix, 0 otherwise.
+ */
+int startsWith(const char *str, const char *prefix)
+{
+	while (*prefix)
+	{
+		if (*prefix != *str)
+		{
+			return (0);
+		}
+		prefix++;
+		str++;
+	}
+	return (1);
+}
+/**
  * main - Simple UNIX command line interpreter
  *
  * Description: A basic command line interpreter that reads one-word
@@ -23,9 +43,16 @@ int main(void)
 		}
 		if (strcmp(input, "exit") == 0)
 		{
-			break;
+			exit(0);
 		}
-		if (strcmp(input, "env") == 0)
+		else if (startsWith(input, "exit "))
+		{
+			char *status_str = input + 5;
+			int status = atoi(status_str);
+
+			exit(status);
+		}
+		else if (strcmp(input, "env") == 0)
 		{
 			printEnvironment();
 		}

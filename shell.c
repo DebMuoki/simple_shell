@@ -32,10 +32,51 @@ void stripNewline(char *str)
 }
 
 /**
+ * findCommandPath - Searches for the full path of a command
+ * @command: The command to search for
+ * @full_path: A buffer to store the full path of the command
+ *
+ * Return: 1 if the command was found, 0 otherwise.
+ */
+int findCommandPath(char *command, char *full_path)
+{
+	char *path = getenv("PATH");
+	int path_len = strlen(path);
+	int full_path_len = 0;
+	int i;
+
+	for (i = 0; i <= path_len; i++)
+	{
+		if (path[i] == ':' || path[i] == '\0')
+		{
+			if (full_path_len == 0)
+				snprintf(full_path, MAX_COMMAND_LENGTH, "./%s", command);
+			else
+			{
+				full_path[full_path_len] = '/';
+				full_path_len++;
+				strcpy(full_path + full_path_len, command);
+			}
+
+			if (access(full_path, X_OK) == 0)
+			{
+				return (1);
+			}
+			full_path_len = 0;
+		}
+		else
+		{
+			full_path[full_path_len] = path[i];
+			full_path_len++;
+		}
+	}
+	return (0);
+}
+
+/**
  * executeCommand - Executes a command with arguments in a child process
  * @command: The command and its arguments as a single string
  */
-
 void executeCommand(char *command)
 {
 	pid_t child_pid;
@@ -47,15 +88,20 @@ void executeCommand(char *command)
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
+
 	if (child_pid == 0)
 	{
 		char *args[MAX_COMMAND_LENGTH];
 
-		parseArguments(command, args);
+		if (parseArguments(command, args) == -1)
+		{
+			fprintf(stderr, "Error parsing arguments\n");
+			exit(EXIT_FAILURE);
+		}
 		if (execvp(args[0], args) == -1)
 		{
-		perror("exec");
-		exit(EXIT_FAILURE);
+			fprintf(stderr, "%s: command not found\n", args[0]);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
@@ -63,6 +109,7 @@ void executeCommand(char *command)
 		wait(&status);
 	}
 }
+
 
 /**
  * parseArguments - Parses a command string into an array of arguments
@@ -74,12 +121,22 @@ void executeCommand(char *command)
 int parseArguments(char *command, char *args[])
 {
 	int argc = 0;
-	char *token = strtok(command, " \t\n");
+	char *token = command;
 
-	while (token != NULL && argc < MAX_COMMAND_LENGTH - 1)
+	while (*token != '\0' && argc < MAX_COMMAND_LENGTH - 1)
 	{
+		while (*token == ' ' || *token == '\t')
+			token++;
+
+		if (*token == '\0')
+			break;
+
 		args[argc++] = token;
-		token = strtok(NULL, " \t\n");
+		while (*token != ' ' && *token != '\t' && *token != '\0')
+			token++;
+
+		if (*token != '\0')
+			*token++ = '\0';
 	}
 	args[argc] = NULL;
 	return (argc);
