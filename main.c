@@ -4,7 +4,7 @@
  * startsWith - Checks if a string starts with a specified prefix.
  * @str: The string to check.
  * @prefix: The prefix to look for.
- * 
+ *
  * Return: 1 if the string starts with the prefix, 0 otherwise.
  */
 int startsWith(const char *str, const char *prefix)
