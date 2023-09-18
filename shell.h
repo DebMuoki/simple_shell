@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #define MAX_COMMAND_LENGTH 100
+#define READ_SIZE 1024
 #define BUFFER_SIZE 1024
 
 #include <stdio.h>
@@ -13,13 +14,12 @@
 extern char **environ;
 
 int main(void);
-int readCommand(char *input);
 void stripNewline(char *str);
 void executeCommand(char *command);
 int parseArguments(char *command, char *args[]);
 void printEnvironment(void);
 int findCommandPath(char *command, char *full_path);
 int startsWith(const char *str, const char *prefix);
-char *custom_getline(void);
+ssize_t custom_getline(char **buffer, size_t *buf_size);
 
 #endif
