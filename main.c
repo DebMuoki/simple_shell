@@ -31,33 +31,18 @@ int startsWith(const char *str, const char *prefix)
  */
 int main(void)
 {
-	char *input = NULL;
-	size_t buf_size = 0;
-	ssize_t read_result;
+	char input[MAX_COMMAND_LENGTH];
 
 	while (1)
 	{
 		printf("$ ");
 
-		read_result = custom_getline(&input, &buf_size);
-		if (read_result == -1)
-		{
-			perror("custom_getline");
-			exit(EXIT_FAILURE);
-		}
-
-		if (read_result == 0)
+		if (readCommand(input) == 0)
 		{
 			break;
 		}
-		if (input[read_result - 1] == '\n')
-		{
-			input[read_result - 1] = '\0';
-		}
-
 		if (strcmp(input, "exit") == 0)
 		{
-			free(input);
 			exit(0);
 		}
 		else if (startsWith(input, "exit "))
@@ -65,7 +50,6 @@ int main(void)
 			char *status_str = input + 5;
 			int status = atoi(status_str);
 
-			free(input);
 			exit(status);
 		}
 		else if (strcmp(input, "env") == 0)
@@ -76,9 +60,6 @@ int main(void)
 		{
 			executeCommand(input);
 		}
-		free(input);
-		input = NULL;
-		buf_size = 0;
 	}
 	return (0);
 }
