@@ -13,7 +13,6 @@
 extern char **environ;
 
 int main(void);
-int readCommand(char *input);
 void stripNewline(char *str);
 void executeCommand(char *command);
 int parseArguments(char *command, char *args[]);
@@ -21,5 +20,7 @@ void printEnvironment(void);
 int findCommandPath(char *command, char *full_path);
 int startsWith(const char *str, const char *prefix);
 ssize_t get_line(char **lineptr, size_t *n, int fd);
-
+void changeDirectory(const char *path);
+void setEnvironmentVariable(const char *variable, const char *value);
+void unsetEnvironmentVariable(const char *variable);
 #endif

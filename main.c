@@ -62,6 +62,48 @@ int main(void)
 
 			exit(status);
 		}
+		else if (startsWith(input, "setenv "))
+		{
+			char *args[MAX_COMMAND_LENGTH];
+
+			if (parseArguments(input, args) != 3)
+			{
+				fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
+			}
+			else
+			{
+				setEnvironmentVariable(args[1], args[2]);
+			}
+		}
+		else if (startsWith(input, "unsetenv "))
+		{
+			char *args[MAX_COMMAND_LENGTH];
+
+			if (parseArguments(input, args) != 2)
+			{
+				fprintf(stderr, "Usage: unsetenv VARIABLE\n");
+			}
+			else
+			{
+				unsetEnvironmentVariable(args[1]);
+			}
+		}
+		else if (startsWith(input, "cd "))
+		{
+			char *args[MAX_COMMAND_LENGTH];
+			if (parseArguments(input, args) != 2)
+			{
+				fprintf(stderr, "Usage: cd [DIRECTORY]\n");
+			}
+			else
+			{
+				changeDirectory(args[1]);
+			}
+		}
+		else if (strcmp(input, "cd") == 0)
+		{
+			changeDirectory("~");
+		}
 		else if (strcmp(input, "env") == 0)
 		{
 			printEnvironment();
