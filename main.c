@@ -31,16 +31,26 @@ int startsWith(const char *str, const char *prefix)
  */
 int main(void)
 {
-	char input[MAX_COMMAND_LENGTH];
+	char *input = NULL;
+	size_t n = 0;
+	ssize_t len;
 
 	while (1)
 	{
 		printf("$ ");
+		fflush(stdout);
 
-		if (readCommand(input) == 0)
+		len = get_line(&input, &n, STDIN_FILENO);
+		if (len <= 0)
 		{
 			break;
 		}
+		if (len > 0 && input[len - 1] == '\n')
+		{
+			input[len - 1] = '\0';
+			len--;
+		}
+
 		if (strcmp(input, "exit") == 0)
 		{
 			exit(0);
@@ -61,5 +71,7 @@ int main(void)
 			executeCommand(input);
 		}
 	}
+
+	free(input);
 	return (0);
 }

@@ -1,23 +1,6 @@
 #include "shell.h"
 
 /**
- * readCommand - Reads a command from the user
- * @input: Buffer to store the input command
- *
- * Return: 0 on Ctrl+D (EOF), 1 otherwise.
- */
-int readCommand(char *input)
-{
-	if (fgets(input, MAX_COMMAND_LENGTH, stdin) == NULL)
-	{
-		printf("\n");
-		return (0);
-	}
-	stripNewline(input);
-	return (1);
-}
-
-/**
  * stripNewline - Removes the trailing newline character from a string
  * @str: The string to modify
  */

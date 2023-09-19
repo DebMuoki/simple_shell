@@ -20,6 +20,6 @@ int parseArguments(char *command, char *args[]);
 void printEnvironment(void);
 int findCommandPath(char *command, char *full_path);
 int startsWith(const char *str, const char *prefix);
-char *custom_getline(void);
+ssize_t get_line(char **lineptr, size_t *n, int fd);
 
 #endif
