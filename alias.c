@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * setAlias - Sets or updates an alias.
  * @name: The name of the alias.

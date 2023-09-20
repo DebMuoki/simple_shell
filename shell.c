@@ -60,6 +60,7 @@ int findCommandPath(char *command, char *full_path)
  * executeCommand - Executes a command with arguments in a child process
  * @command: The command and its arguments as a single string
  */
+int lastExitStatus = 0;
 int executeCommand(char *command)
 {
 	pid_t child_pid;
@@ -90,6 +91,10 @@ int executeCommand(char *command)
 	else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+		{
+			lastExitStatus = WEXITSTATUS(status);
+		}
 	}
 	return (status);
 }
@@ -112,11 +117,11 @@ int parseArguments(char *command, char *args[])
 		while (*token == ' ' || *token == '\t')
 			token++;
 
-		if (*token == '\0')
+		if (*token == '\0' || *token == '#')
 			break;
 
 		args[argc++] = token;
-		while (*token != ' ' && *token != '\t' && *token != '\0')
+		while (*token != ' ' && *token != '\t' && *token != '\0' && *token != '#')
 			token++;
 
 		if (*token != '\0')

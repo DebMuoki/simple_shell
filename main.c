@@ -68,7 +68,18 @@ int main(void)
 		}
 		while ((command = strsep(&rest, ";")) != NULL)
 		{
-			executeCommand(command);
+			char *expandedCommand = replaceVariables(command);
+			char *aliasCommand = getAlias(expandedCommand);
+
+			if (aliasCommand != NULL)
+			{
+				executeCommand(aliasCommand);
+			}
+			else
+			{
+				executeCommand(expandedCommand);
+			}
+			free(expandedCommand);
 		}
 		if (strcmp(input, "exit") == 0)
 		{
@@ -123,19 +134,6 @@ int main(void)
 		else if (strcmp(input, "cd") == 0)
 		{
 			changeDirectory("~");
-		}
-		else if (startsWith(input, "alias "))
-		{
-			char *args[MAX_COMMAND_LENGTH];
-
-			if (parseArguments(input, args) < 2)
-			{
-				fprintf(stderr, "Usage: alias name='value'\n");
-			}
-			else
-			{
-				setAlias(args[1], args[2]);
-			}
 		}
 		else if (strcmp(input, "env") == 0)
 		{

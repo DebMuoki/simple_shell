@@ -9,9 +9,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 extern char **environ;
-
 typedef struct alias
 {
 	char *name;
@@ -20,8 +20,6 @@ typedef struct alias
 }
 alias_t;
 
-void setAlias(char *name, char *value);
-char *getAlias(char *name);
 int main(void);
 void stripNewline(char *str);
 int executeCommand(char *command);
@@ -33,5 +31,8 @@ ssize_t get_line(char **lineptr, size_t *n, int fd);
 void changeDirectory(const char *path);
 void setEnvironmentVariable(const char *variable, const char *value);
 void unsetEnvironmentVariable(const char *variable);
+char *replaceVariables(char *command);
+void setAlias(char *name, char *value);
+char *getAlias(char *name);
 
 #endif
