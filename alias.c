@@ -4,7 +4,6 @@
  * setAlias - Sets or updates an alias.
  * @name: The name of the alias.
  * @value: The value of the alias.
- *
  * Return: Void.
  */
 alias_t *alias_list = NULL;
@@ -24,7 +23,6 @@ void setAlias(char *name, char *value)
 /**
  * getAlias - Retrieves the value of an alias.
  * @name: The name of the alias.
- *
  * Return: The value of the alias, or NULL if the alias does not exist.
  */
 char *getAlias(char *name)
