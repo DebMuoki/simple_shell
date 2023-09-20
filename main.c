@@ -37,8 +37,6 @@ int main(void)
 
 	while (1)
 	{
-		printf("$ ");
-
 		len = get_line(&input, &n, STDIN_FILENO);
 		if (len <= 0)
 		{
