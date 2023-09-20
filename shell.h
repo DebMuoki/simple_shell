@@ -12,9 +12,19 @@
 
 extern char **environ;
 
+typedef struct alias
+{
+	char *name;
+	char *value;
+	struct alias *next;
+}
+alias_t;
+
+void setAlias(char *name, char *value);
+char *getAlias(char *name);
 int main(void);
 void stripNewline(char *str);
-void executeCommand(char *command);
+int executeCommand(char *command);
 int parseArguments(char *command, char *args[]);
 void printEnvironment(void);
 int findCommandPath(char *command, char *full_path);
@@ -23,4 +33,5 @@ ssize_t get_line(char **lineptr, size_t *n, int fd);
 void changeDirectory(const char *path);
 void setEnvironmentVariable(const char *variable, const char *value);
 void unsetEnvironmentVariable(const char *variable);
+
 #endif

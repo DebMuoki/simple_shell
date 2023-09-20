@@ -34,6 +34,9 @@ int main(void)
 	char *input = NULL;
 	size_t n = 0;
 	ssize_t len;
+	char *command;
+	char *rest = input;
+	int status = 0;
 
 	while (1)
 	{
@@ -47,7 +50,26 @@ int main(void)
 			input[len - 1] = '\0';
 			len--;
 		}
-
+		while ((command = strsep(&rest, "&&")) != NULL)
+		{
+			if (status == 0)
+			{
+				status = executeCommand(command);
+			}
+		}
+		rest = input;
+		status = 0;
+		while ((command = strsep(&rest, "||")) != NULL)
+		{
+			if (status != 0)
+			{
+				status = executeCommand(command);
+			}
+		}
+		while ((command = strsep(&rest, ";")) != NULL)
+		{
+			executeCommand(command);
+		}
 		if (strcmp(input, "exit") == 0)
 		{
 			exit(0);
@@ -101,6 +123,19 @@ int main(void)
 		else if (strcmp(input, "cd") == 0)
 		{
 			changeDirectory("~");
+		}
+		else if (startsWith(input, "alias "))
+		{
+			char *args[MAX_COMMAND_LENGTH];
+
+			if (parseArguments(input, args) < 2)
+			{
+				fprintf(stderr, "Usage: alias name='value'\n");
+			}
+			else
+			{
+				setAlias(args[1], args[2]);
+			}
 		}
 		else if (strcmp(input, "env") == 0)
 		{

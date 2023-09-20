@@ -60,7 +60,7 @@ int findCommandPath(char *command, char *full_path)
  * executeCommand - Executes a command with arguments in a child process
  * @command: The command and its arguments as a single string
  */
-void executeCommand(char *command)
+int executeCommand(char *command)
 {
 	pid_t child_pid;
 	int status;
@@ -91,6 +91,7 @@ void executeCommand(char *command)
 	{
 		wait(&status);
 	}
+	return (status);
 }
 
 
