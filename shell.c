@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * stripNewline - Function that removes a trailing newline character from a string
+ * stripNewline - Function removes a trailing newline character from a string
  * @str: This is the string to modify
  */
 void stripNewline(char *str)
@@ -58,6 +58,7 @@ int findCommandPath(char *command, char *full_path)
 /**
  * executeCommand - Executes a command with arguments in a child process
  * @command: The command and its arguments as a single string
+ * Return: an integer value
  */
 int executeCommand(char *command)
 {
