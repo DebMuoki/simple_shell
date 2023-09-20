@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * setEnvironmentVariable - This function Sets or modifies an environment variable.
+ * setEnvironmentVariable - This function Sets an environment variable.
  * @variable: This is the name of the environment variable.
  * @value: The value to assign to the environment variable.
  *

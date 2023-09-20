@@ -10,6 +10,7 @@ alias_t *alias_list = NULL;
 void setAlias(char *name, char *value)
 {
 	alias_t *new_alias = malloc(sizeof(alias_t));
+
 	if (new_alias == NULL)
 	{
 		return;
@@ -28,6 +29,7 @@ void setAlias(char *name, char *value)
 char *getAlias(char *name)
 {
 	alias_t *current = alias_list;
+
 	while (current != NULL)
 	{
 		if (strcmp(current->name, name) == 0)
