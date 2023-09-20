@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * stripNewline - Removes the trailing newline character from a string
- * @str: The string to modify
+ * stripNewline - on that Removes trailing newline character from a string
+ * @str: This is the string to modify
  */
 void stripNewline(char *str)
 {
