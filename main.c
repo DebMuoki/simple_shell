@@ -37,6 +37,8 @@ int main(void)
 
 	while (1)
 	{
+		fprintf(stderr, "$ ");
+
 		len = get_line(&input, &n, STDIN_FILENO);
 		if (len <= 0)
 		{
@@ -57,6 +59,7 @@ int main(void)
 			char *status_str = input + 5;
 			int status = atoi(status_str);
 
+			free(status_str);
 			exit(status);
 		}
 		else if (startsWith(input, "setenv "))
