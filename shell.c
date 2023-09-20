@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * stripNewline - on that Removes trailing newline character from a string
+ * stripNewline - Function that removes a trailing newline character from a string
  * @str: This is the string to modify
  */
 void stripNewline(char *str)
@@ -15,10 +15,9 @@ void stripNewline(char *str)
 }
 
 /**
- * findCommandPath - Searches for the full path of a command
- * @command: The command to search for
+ * findCommandPath - Function that  Searches for the full path of a command
+ * @command: This is the  command to search for
  * @full_path: A buffer to store the full path of the command
- *
  * Return: 1 if the command was found, 0 otherwise.
  */
 int findCommandPath(char *command, char *full_path)
