@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * get_line - reads an entire line from file descriptor
- * @lineptr: pointer to a buffer to hold the line of text
- * @n: pointer to the size of the buffer
- * @fd: file descriptor to read from
- * Return: number of characters read, or -1 on failure
+ * get_line - Function reads an entire line from file descriptor
+ * @lineptr: This is the pointer to a buffer to hold the line of text
+ * @n: This is the pointer to the size of the buffer
+ * @fd: This is the file descriptor to read from
+ * Return: The number of characters read, or -1 on failure
  */
 
 ssize_t get_line(char **lineptr, size_t *n, int fd)
