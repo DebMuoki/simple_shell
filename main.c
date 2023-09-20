@@ -57,7 +57,6 @@ int main(void)
 			char *status_str = input + 5;
 			int status = atoi(status_str);
 
-			free(status_str);
 			exit(status);
 		}
 		else if (startsWith(input, "setenv "))
