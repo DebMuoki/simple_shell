@@ -1,9 +1,10 @@
 #include "shell.h"
 
 /**
- * setEnvironmentVariable - Set or modify an environment variable.
- * @variable: The name of the environment variable.
+ * setEnvironmentVariable - This function Sets an environment variable.
+ * @variable: This is the name of the environment variable.
  * @value: The value to assign to the environment variable.
+ *
  */
 void setEnvironmentVariable(const char *variable, const char *value)
 {
@@ -14,8 +15,9 @@ void setEnvironmentVariable(const char *variable, const char *value)
 }
 
 /**
- * unsetEnvironmentVariable - Unset an environment variable.
+ * unsetEnvironmentVariable - Function that Unsets an environment variable.
  * @variable: The name of the environment variable to unset.
+ *
  */
 void unsetEnvironmentVariable(const char *variable)
 {
@@ -25,8 +27,9 @@ void unsetEnvironmentVariable(const char *variable)
 	}
 }
 /**
- * changeDirectory - Change the current working directory.
- * @path: The path to the directory to change to.
+ * changeDirectory - Function that Changes the current working directory.
+ * @path: This is the path to the directory to change to.
+ *
  */
 void changeDirectory(const char *path)
 {
