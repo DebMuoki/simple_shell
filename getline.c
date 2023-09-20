@@ -4,7 +4,6 @@
  * @lineptr: pointer to a buffer to hold the line of text
  * @n: pointer to the size of the buffer
  * @fd: file descriptor to read from
- *
  * Return: number of characters read, or -1 on failure
  */
 

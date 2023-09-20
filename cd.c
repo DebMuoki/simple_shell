@@ -4,6 +4,7 @@
  * setEnvironmentVariable - Set or modify an environment variable.
  * @variable: The name of the environment variable.
  * @value: The value to assign to the environment variable.
+ *
  */
 void setEnvironmentVariable(const char *variable, const char *value)
 {
@@ -16,6 +17,7 @@ void setEnvironmentVariable(const char *variable, const char *value)
 /**
  * unsetEnvironmentVariable - Unset an environment variable.
  * @variable: The name of the environment variable to unset.
+ *
  */
 void unsetEnvironmentVariable(const char *variable)
 {
@@ -27,6 +29,7 @@ void unsetEnvironmentVariable(const char *variable)
 /**
  * changeDirectory - Change the current working directory.
  * @path: The path to the directory to change to.
+ *
  */
 void changeDirectory(const char *path)
 {
