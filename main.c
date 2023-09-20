@@ -38,7 +38,6 @@ int main(void)
 	while (1)
 	{
 		printf("$ ");
-		fflush(stdout);
 
 		len = get_line(&input, &n, STDIN_FILENO);
 		if (len <= 0)
@@ -91,6 +90,7 @@ int main(void)
 		else if (startsWith(input, "cd "))
 		{
 			char *args[MAX_COMMAND_LENGTH];
+
 			if (parseArguments(input, args) != 2)
 			{
 				fprintf(stderr, "Usage: cd [DIRECTORY]\n");
